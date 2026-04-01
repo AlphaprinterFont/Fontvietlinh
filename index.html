@@ -8,7 +8,6 @@
         /* =========================================
            1. KHAI BÁO BIẾN CHO CÁC GIAO DIỆN
            ========================================= */
-        /* Giao diện Sáng (Mặc định) */
         :root {
             --bg-color: #f4f4f4;
             --text-color: #202124;
@@ -21,7 +20,6 @@
             --font-title-gradient: linear-gradient(90deg, #1a73e8, #ea4335);
         }
 
-        /* Giao diện Tối */
         [data-theme="dark"] {
             --bg-color: #121212;
             --text-color: #ffffff;
@@ -34,17 +32,16 @@
             --font-title-gradient: linear-gradient(90deg, #8ab4f8, #f28b82);
         }
 
-        /* Giao diện Xanh Google (Phủ toàn nền) */
         [data-theme="blue"] {
-            --bg-color: #1a73e8; /* Nền xanh Google rực rỡ */
-            --text-color: #ffffff; /* Chữ màu trắng */
-            --card-bg: #1557b0; /* Khung card màu xanh đậm hơn để tạo chiều sâu */
+            --bg-color: #1a73e8;
+            --text-color: #ffffff; 
+            --card-bg: #1557b0; 
             --border-color: #2b61b3;
-            --btn-bg: #0d4294; /* Nút bấm lúc chưa chọn màu xanh tối */
+            --btn-bg: #0d4294; 
             --btn-text: #ffffff;
-            --btn-active-bg: #ffffff; /* Nút được chọn chuyển thành Trắng */
-            --btn-active-text: #1a73e8; /* Chữ trong nút được chọn màu Xanh */
-            --font-title-gradient: linear-gradient(90deg, #ffffff, #fbbc05); /* Tên font: Trắng chuyển Vàng */
+            --btn-active-bg: #ffffff; 
+            --btn-active-text: #1a73e8; 
+            --font-title-gradient: linear-gradient(90deg, #ffffff, #fbbc05); 
         }
 
         /* =========================================
@@ -67,15 +64,13 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
         }
 
-        /* Sửa màu logo text khi ở nền Xanh để chữ cái đầu không bị chìm */
         [data-theme="blue"] .logo-text {
             background: linear-gradient(90deg, #e8f0fe, #ea4335, #fbbc05, #34a853);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         
         .slogan { font-size: 13px; color: #9aa0a6; margin-top: 4px; font-style: italic; font-weight: bold; }
-        [data-theme="blue"] .slogan { color: #d3e3fd; } /* Chữ slogan sáng hơn ở nền xanh */
+        [data-theme="blue"] .slogan { color: #d3e3fd; } 
 
         .header-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; }
 
@@ -87,42 +82,21 @@
         .header-link-primary { background-color: var(--btn-active-bg); color: var(--btn-active-text); }
         .header-link:hover { opacity: 0.8; }
 
-        /* KHU VỰC CHỌN MÀU THEME (ICON MÀU) */
-        .theme-selector {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-left: 10px;
-        }
+        .theme-selector { display: flex; gap: 12px; align-items: center; margin-left: 10px; }
         .theme-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            width: 20px; height: 20px; border-radius: 50%; cursor: pointer; position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s;
         }
         .theme-dot:hover { transform: scale(1.1); }
-        
-        /* Hiệu ứng vòng tròn bao quanh khi được chọn */
         .theme-dot::after {
-            content: '';
-            position: absolute;
-            top: -4px; left: -4px; right: -4px; bottom: -4px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            transition: border-color 0.2s;
+            content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border-radius: 50%; border: 2px solid transparent; transition: border-color 0.2s;
         }
-        .theme-dot.active::after {
-            border-color: var(--text-color); 
-        }
-
+        .theme-dot.active::after { border-color: var(--text-color); }
         .dot-light { background-color: #f4f4f4; border: 1px solid #ccc; }
         .dot-dark { background-color: #202124; border: 1px solid #000; }
         .dot-blue { background-color: #1a73e8; border: 1px solid #1557b0; }
 
-        /* Các khối chức năng */
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
         .global-input { width: 100%; padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); }
         .global-input::placeholder { color: #888; }
@@ -152,13 +126,14 @@
             font-size: 18px; font-weight: 900;
             background: var(--font-title-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
         .font-category-tag { font-weight: bold; font-size: 11px; background: var(--btn-bg); padding: 4px 10px; border-radius: 12px; color: var(--text-color); text-transform: uppercase; letter-spacing: 0.5px;}
         [data-theme="blue"] .font-category-tag { color: #ffffff; }
 
+        /* KHU VỰC NÚT TẢI */
         .download-btn {
             background-color: var(--btn-active-bg); color: var(--btn-active-text);
-            text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: bold; border: 1px solid transparent;
+            text-decoration: none; border-radius: 6px; font-weight: bold; border: 1px solid transparent;
+            padding: 6px 12px; font-size: 12px; 
         }
         .download-btn:hover { opacity: 0.8; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
@@ -180,7 +155,9 @@
             .font-card { padding: 16px; gap: 12px; }
             .font-title { font-size: 16px; }
             .font-category-tag { font-size: 10px; padding: 3px 8px; }
-            .download-btn { padding: 6px 12px; font-size: 12px; }
+            
+            /* Giữ nút tải nhỏ gọn trên điện thoại */
+            .download-btn { padding: 5px 10px; font-size: 11px; border-radius: 5px; }
             
             .preview-text { font-size: 28px; min-height: 50px; padding-top: 5px; }
         }
@@ -238,12 +215,27 @@
 
     <script>
         // ---------------------------------------------------------
-        // KHO DỮ LIỆU FONT CỦA BẠN
+        // KHO DỮ LIỆU FONT CỦA BẠN (Đã xóa các trường số lượng tải)
         // ---------------------------------------------------------
         const myFonts = [
-            { name: "Bree Serif", file: "VL-BreeSerif.woff2", downloadFile: "VL-BreeSerif.ttf", category: "serif" },
-            { name: "Belgrano", file: "VL-Belgrano.woff2", downloadFile: "VL-Belgrano.ttf", category: "serif" },
-            { name: "McLaren", file: "VL-McLaren.woff2", downloadFile: "VL-McLaren.ttf", category: "display" }
+            { 
+                name: "Bree Serif", 
+                file: "VL-BreeSerif.woff2", 
+                downloadFile: "VL-BreeSerif.ttf", 
+                category: "serif"
+            },
+            { 
+                name: "Belgrano", 
+                file: "VL-Belgrano.woff2", 
+                downloadFile: "VL-Belgrano.ttf", 
+                category: "serif"
+            },
+            { 
+                name: "McLaren", 
+                file: "VL-McLaren.woff2", 
+                downloadFile: "VL-McLaren.ttf", 
+                category: "display"
+            }
         ];
 
         // ---------------------------------------------------------
@@ -266,6 +258,7 @@
             card.className = 'font-card';
             card.setAttribute('data-category', font.category);
             
+            // Xóa code in số đếm, chỉ giữ lại nút tải gọn gàng
             card.innerHTML = `
                 <div class="font-header">
                     <div class="font-name">
@@ -285,7 +278,6 @@
         // CÁC CHỨC NĂNG TƯƠNG TÁC & LƯU TRỮ (LOCAL STORAGE)
         // ---------------------------------------------------------
         
-        // 1. Quản lý Theme (Sáng, Tối, Xanh Google)
         const themeDots = document.querySelectorAll('.theme-dot');
         const savedTheme = localStorage.getItem('theme') || 'dark';
 
@@ -316,7 +308,6 @@
             });
         });
 
-        // 2. Quản lý Giao diện Lưới / Ngang
         const btnGrid = document.getElementById('btnGrid');
         const btnList = document.getElementById('btnList');
         const savedView = localStorage.getItem('view') || 'grid'; 
@@ -345,7 +336,6 @@
             localStorage.setItem('view', 'list'); 
         });
 
-        // 3. Quản lý Filter & Gõ chữ
         const globalInput = document.getElementById('globalInput');
         globalInput.addEventListener('input', function() {
             const allPreviews = document.querySelectorAll('.preview-text');
