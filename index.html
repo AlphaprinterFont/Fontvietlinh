@@ -75,8 +75,18 @@
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
         .global-input { width: 100%; padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); }
 
-        /* THANH LỌC (FILTER BAR) */
+        /* THANH LỌC & NÚT CHUYỂN GIAO DIỆN (Đã gom vào 1 hàng) */
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
         .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; }
+        .view-toggle { display: flex; gap: 10px; }
+
         .filter-btn {
             padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 20px;
             background-color: var(--btn-bg); color: var(--btn-text); cursor: pointer; font-size: 14px;
@@ -87,7 +97,18 @@
         /* =========================================
            3. LƯỚI HIỂN THỊ CÁC FONT (GALLERY)
            ========================================= */
-        .font-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; padding: 0 40px 40px 40px; }
+        .font-gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 24px; 
+            padding: 0 40px 40px 40px; 
+        }
+
+        /* Thêm class cho giao diện Hàng Ngang */
+        .font-gallery.list-view {
+            grid-template-columns: 1fr; /* Ép hiển thị 1 cột duy nhất trải dài */
+        }
+
         .font-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 15px; }
         
         .font-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
@@ -130,12 +151,19 @@
     <div class="controls-section">
         <input type="text" class="global-input" id="globalInput" placeholder="Gõ câu gì đó để thử tất cả các font..." value="Thiết kế thương hiệu">
         
-        <div class="filter-bar" id="filterBar">
-            <button class="filter-btn active" data-filter="all">Tất cả</button>
-            <button class="filter-btn" data-filter="script">Script</button>
-            <button class="filter-btn" data-filter="sans-serif">Sans-Serif (Không chân)</button>
-            <button class="filter-btn" data-filter="serif">Serif (Có chân)</button>
-            <button class="filter-btn" data-filter="display">Trang trí (Display)</button>
+        <div class="controls-row">
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-btn active" data-filter="all">Tất cả</button>
+                <button class="filter-btn" data-filter="script">Script</button>
+                <button class="filter-btn" data-filter="sans-serif">Sans-Serif (Không chân)</button>
+                <button class="filter-btn" data-filter="serif">Serif (Có chân)</button>
+                <button class="filter-btn" data-filter="display">Trang trí (Display)</button>
+            </div>
+
+            <div class="view-toggle">
+                <button class="filter-btn active" id="btnGrid">⊞ Lưới</button>
+                <button class="filter-btn" id="btnList">𝌸 Hàng ngang</button>
+            </div>
         </div>
     </div>
 
@@ -161,7 +189,7 @@
             { 
                 name: "McLaren", 
                 file: "VL-McLaren.woff2", 
-                downloadFile: "VL-McLaren.ttf",   // Nếu bạn muốn họ tải file nén
+                downloadFile: "VL-McLaren.ttf",   
                 category: "display"
             }
         ];
@@ -188,7 +216,6 @@
             card.className = 'font-card';
             card.setAttribute('data-category', font.category);
             
-            // ĐÃ SỬA: Thay font.file thành font.downloadFile ở href
             card.innerHTML = `
                 <div class="font-header">
                     <p class="font-name">${font.name} <span class="font-category-tag">${font.category}</span></p>
@@ -202,7 +229,7 @@
         });
 
         // ---------------------------------------------------------
-        // CÁC CHỨC NĂNG TƯƠNG TÁC (Đổi màu, gõ chữ, lọc font)
+        // CÁC CHỨC NĂNG TƯƠNG TÁC (Đổi màu, gõ chữ, lọc font, đổi view)
         // ---------------------------------------------------------
         
         // Chuyển Sáng/Tối
@@ -226,7 +253,7 @@
         });
 
         // Lọc Font
-        const filterBtns = document.querySelectorAll('.filter-btn');
+        const filterBtns = document.querySelectorAll('#filterBar .filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -243,6 +270,22 @@
                     }
                 });
             });
+        });
+
+        // Chuyển đổi giao diện Lưới / Hàng ngang
+        const btnGrid = document.getElementById('btnGrid');
+        const btnList = document.getElementById('btnList');
+
+        btnGrid.addEventListener('click', () => {
+            gallery.classList.remove('list-view'); // Gỡ class list-view để về Grid mặc định
+            btnGrid.classList.add('active');
+            btnList.classList.remove('active');
+        });
+
+        btnList.addEventListener('click', () => {
+            gallery.classList.add('list-view'); // Thêm class list-view để thành 1 cột
+            btnList.classList.add('active');
+            btnGrid.classList.remove('active');
         });
     </script>
 </body>
