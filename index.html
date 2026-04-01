@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thư viện Font Việt Linh</title>
     <style>
-        /* 1. KHAI BÁO BIẾN CHO GIAO DIỆN SÁNG / TỐI */
+        /* =========================================
+           1. KHAI BÁO BIẾN CHO GIAO DIỆN SÁNG / TỐI
+           ========================================= */
         :root {
             --bg-color: #f4f4f4;
             --text-color: #202124;
@@ -13,7 +15,7 @@
             --border-color: #dadce0;
             --btn-bg: #e8eaed;
             --btn-text: #202124;
-            --btn-active-bg: #1a73e8; /* Màu xanh Google khi nút được chọn */
+            --btn-active-bg: #1a73e8; 
             --btn-active-text: #ffffff;
         }
 
@@ -24,16 +26,13 @@
             --border-color: #3c4043;
             --btn-bg: #3c4043;
             --btn-text: #e8eaed;
-            --btn-active-bg: #8ab4f8; /* Màu xanh sáng cho nền tối */
+            --btn-active-bg: #8ab4f8; 
             --btn-active-text: #202124;
         }
 
-        /* 2. KHAI BÁO FONT DEMO (Nhớ đổi lại đường dẫn file của bạn) */
-        @font-face { font-family: 'VietLinhThuPhap'; src: url('fonts/vl-thuphap.woff2') format('woff2'); }
-        @font-face { font-family: 'VietLinhSans'; src: url('fonts/vl-sans.woff2') format('woff2'); }
-        @font-face { font-family: 'VietLinhDisplay'; src: url('fonts/vl-display.woff2') format('woff2'); }
-
-        /* 3. CSS CƠ BẢN & THANH ĐIỀU KHIỂN */
+        /* =========================================
+           2. CSS CƠ BẢN & BỐ CỤC
+           ========================================= */
         * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
         body { font-family: Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; }
 
@@ -61,21 +60,25 @@
         .filter-btn:hover { border-color: var(--text-color); }
         .filter-btn.active { background-color: var(--btn-active-bg); color: var(--btn-active-text); border-color: transparent; font-weight: bold; }
 
-        /* 4. LƯỚI HIỂN THỊ CÁC FONT */
+        /* =========================================
+           3. LƯỚI HIỂN THỊ CÁC FONT (GALLERY)
+           ========================================= */
         .font-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; padding: 0 40px 40px 40px; }
         .font-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 15px; }
-        .font-name { font-size: 14px; font-weight: bold; color: #9aa0a6; margin: 0; display: flex; justify-content: space-between; }
-        .font-category-tag { font-weight: normal; font-size: 12px; background: var(--btn-bg); padding: 2px 8px; border-radius: 10px; }
         
+        .font-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .font-name { font-size: 15px; font-weight: bold; color: #9aa0a6; margin: 0; display: flex; align-items: center; gap: 10px; }
+        .font-category-tag { font-weight: normal; font-size: 12px; background: var(--btn-bg); padding: 2px 8px; border-radius: 10px; color: var(--btn-text); text-transform: capitalize; }
+        
+        /* CSS cho Nút Tải về */
+        .download-btn {
+            background-color: var(--btn-active-bg); color: var(--btn-active-text);
+            text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: bold;
+        }
+        .download-btn:hover { opacity: 0.8; }
+
         .preview-text { font-size: 40px; outline: none; word-wrap: break-word; min-height: 80px; }
-
-        /* Font Classes */
-        .f-thuphap { font-family: 'VietLinhThuPhap', sans-serif; }
-        .f-sans { font-family: 'VietLinhSans', sans-serif; }
-        .f-display { font-family: 'VietLinhDisplay', sans-serif; }
-
-        /* Class tiện ích dùng để ẩn card khi bị lọc */
-        .hidden { display: none !important; }
+        .hidden { display: none !important; } /* Class dùng để ẩn card khi lọc */
     </style>
 </head>
 <body data-theme="dark">
@@ -90,34 +93,78 @@
         
         <div class="filter-bar" id="filterBar">
             <button class="filter-btn active" data-filter="all">Tất cả</button>
-            <button class="filter-btn" data-filter="thu-phap">Thư pháp</button>
+            <button class="filter-btn" data-filter="script">Script</button>
             <button class="filter-btn" data-filter="sans-serif">Sans-Serif (Không chân)</button>
             <button class="filter-btn" data-filter="serif">Serif (Có chân)</button>
             <button class="filter-btn" data-filter="display">Trang trí (Display)</button>
         </div>
     </div>
 
-    <div class="font-gallery" id="fontGallery">
-        
-        <div class="font-card" data-category="thu-phap">
-            <p class="font-name">Việt Linh Thư Pháp <span class="font-category-tag">Thư pháp</span></p>
-            <div class="preview-text f-thuphap" contenteditable="true">Thiết kế thương hiệu</div>
-        </div>
-
-        <div class="font-card" data-category="sans-serif">
-            <p class="font-name">Việt Linh Hiện Đại <span class="font-category-tag">Sans-Serif</span></p>
-            <div class="preview-text f-sans" contenteditable="true">Thiết kế thương hiệu</div>
-        </div>
-
-        <div class="font-card" data-category="display">
-            <p class="font-name">Việt Linh Phá Cách <span class="font-category-tag">Display</span></p>
-            <div class="preview-text f-display" contenteditable="true">Thiết kế thương hiệu</div>
-        </div>
-
-    </div>
+    <div class="font-gallery" id="fontGallery"></div>
 
     <script>
-        // 1. Chức năng Đổi màu Sáng/Tối
+        // ---------------------------------------------------------
+        // KHO DỮ LIỆU FONT CỦA BẠN (CHỈ CẦN SỬA Ở ĐÂY KHI CÓ FONT MỚI)
+        // ---------------------------------------------------------
+        const myFonts = [
+            { 
+                name: "Việt Linh Thư Pháp (Demo)", 
+                file: "vl-thuphap.woff2", 
+                category: "script", /* Đã đổi từ thu-phap thành script */
+                linkTai: "https://drive.google.com/..." 
+            },
+            { 
+                name: "Việt Linh Hiện Đại (Demo)", 
+                file: "vl-hiendai.woff2", 
+                category: "sans-serif",
+                linkTai: "https://drive.google.com/..." 
+            },
+            { 
+                name: "Việt Linh Phá Cách (Demo)", 
+                file: "vl-phacach.woff2", 
+                category: "display",
+                linkTai: "https://drive.google.com/..." 
+            }
+        ];
+
+        // ---------------------------------------------------------
+        // HỆ THỐNG TỰ ĐỘNG TẠO GIAO DIỆN TỪ DANH SÁCH TRÊN
+        // ---------------------------------------------------------
+        const gallery = document.getElementById('fontGallery');
+
+        myFonts.forEach(font => {
+            // 1. Tự động nạp file font vào CSS
+            const newStyle = document.createElement('style');
+            newStyle.appendChild(document.createTextNode(`
+                @font-face {
+                    font-family: '${font.name}';
+                    src: url('fonts/${font.file}') format('woff2');
+                }
+            `));
+            document.head.appendChild(newStyle);
+
+            // 2. Tự động tạo thẻ (card) hiển thị font
+            const card = document.createElement('div');
+            card.className = 'font-card';
+            card.setAttribute('data-category', font.category);
+            
+            card.innerHTML = `
+                <div class="font-header">
+                    <p class="font-name">${font.name} <span class="font-category-tag">${font.category}</span></p>
+                    <a href="${font.linkTai}" target="_blank" class="download-btn">📥 Tải về</a>
+                </div>
+                <div class="preview-text" style="font-family: '${font.name}'" contenteditable="true" spellcheck="false">
+                    Thiết kế thương hiệu
+                </div>
+            `;
+            gallery.appendChild(card);
+        });
+
+        // ---------------------------------------------------------
+        // CÁC CHỨC NĂNG TƯƠNG TÁC (Đổi màu, gõ chữ, lọc font)
+        // ---------------------------------------------------------
+        
+        // Chuyển Sáng/Tối
         const themeBtn = document.getElementById('themeBtn');
         themeBtn.addEventListener('click', () => {
             if (document.body.getAttribute('data-theme') === 'dark') {
@@ -129,75 +176,33 @@
             }
         });
 
-        // 2. Chức năng Cập nhật Text
+        // Cập nhật chữ hàng loạt
         const globalInput = document.getElementById('globalInput');
-        const allPreviews = document.querySelectorAll('.preview-text');
         globalInput.addEventListener('input', function() {
+            const allPreviews = document.querySelectorAll('.preview-text');
             const newText = this.value || 'Gõ câu gì đó...';
             allPreviews.forEach(preview => preview.innerText = newText);
         });
 
-        // 3. CHỨC NĂNG LỌC (FILTER) FONT
+        // Lọc Font
         const filterBtns = document.querySelectorAll('.filter-btn');
-        const fontCards = document.querySelectorAll('.font-card');
-
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Xóa trạng thái 'active' (đang chọn) của tất cả các nút
                 filterBtns.forEach(b => b.classList.remove('active'));
-                // Thêm trạng thái 'active' cho nút vừa được click
                 btn.classList.add('active');
-
-                // Lấy giá trị data-filter của nút vừa click (ví dụ: 'thu-phap')
+                
                 const filterValue = btn.getAttribute('data-filter');
-
-                // Quét qua toàn bộ các thẻ font
+                const fontCards = document.querySelectorAll('.font-card');
+                
                 fontCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    
-                    // Nếu chọn "Tất cả" HOẶC category của thẻ trùng với bộ lọc -> Hiện
-                    if (filterValue === 'all' || filterValue === cardCategory) {
+                    if (filterValue === 'all' || filterValue === card.getAttribute('data-category')) {
                         card.classList.remove('hidden');
                     } else {
-                        // Nếu không trùng -> Ẩn đi
                         card.classList.add('hidden');
                     }
                 });
             });
         });
     </script>
-// 1. Chỉ cần sửa danh sách này khi có font mới
-const myFonts = [
-    { name: "Việt Linh Thư Pháp", file: "vl-thuphap.woff2", category: "thu-phap" },
-    { name: "Việt Linh Serif", file: "vl-serif.woff2", category: "serif" },
-    // Thêm các font khác ở đây...
-];
-
-// 2. Đoạn code này sẽ tự động tạo giao diện (Bạn không cần chạm vào)
-const gallery = document.getElementById('fontGallery');
-
-myFonts.forEach(font => {
-    const card = document.createElement('div');
-    card.className = 'font-card';
-    card.setAttribute('data-category', font.category);
-    
-    card.innerHTML = `
-        <p class="font-name">${font.name} <span class="font-category-tag">${font.category}</span></p>
-        <div class="preview-text" style="font-family: '${font.name}'" contenteditable="true">
-            Thiết kế thương hiệu Font Việt Linh
-        </div>
-    `;
-    gallery.appendChild(card);
-    
-    // Tự động nạp font vào CSS
-    const newStyle = document.createElement('style');
-    newStyle.appendChild(document.createTextNode(`
-        @font-face {
-            font-family: '${font.name}';
-            src: url('fonts/${font.file}') format('woff2');
-        }
-    `));
-    document.head.appendChild(newStyle);
-});
 </body>
 </html>
