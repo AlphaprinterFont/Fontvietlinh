@@ -188,11 +188,11 @@
             card.className = 'font-card';
             card.setAttribute('data-category', font.category);
             
-            // Ở phần href, hệ thống sẽ tự động gọi đường dẫn fonts/ten-file
+            // ĐÃ SỬA: Thay font.file thành font.downloadFile ở href
             card.innerHTML = `
                 <div class="font-header">
                     <p class="font-name">${font.name} <span class="font-category-tag">${font.category}</span></p>
-                    <a href="fonts/${font.file}" download class="download-btn">📥 Tải font này</a>
+                    <a href="fonts/${font.downloadFile}" download class="download-btn">📥 Tải font này</a>
                 </div>
                 <div class="preview-text" style="font-family: '${font.name}'" contenteditable="true" spellcheck="false">
                     Thiết kế thương hiệu
