@@ -3,128 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Việt Linh | Chia sẻ Font chữ</title>
+    <title>Font Việt Linh</title>
     
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-            padding: 40px 20px;
-            margin: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .header-box {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 16px;
-            color: #555;
-            margin: 0;
-        }
-        
-        /* Chỉnh CSS cho danh sách các font */
-        .font-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            text-align: left;
-        }
-        .font-card {
-            background: #fff;
-            padding: 25px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid #eaeaea;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #202124;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-        .font-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         
-        /* Nút bấm chung */
-        .btn {
-            display: inline-block;
-            padding: 10px 15px;
-            font-size: 15px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 5px;
+        /* Hiệu ứng màu chữ giống logo Google */
+        .logo-text {
+            font-size: 54px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            background: linear-gradient(90deg, #4285F4 25%, #EA4335 25% 50%, #FBBC05 50% 75%, #34A853 75%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-box {
+            width: 100%;
+            max-width: 600px;
             text-align: center;
-            transition: background-color 0.3s ease;
         }
-        .btn-download {
-            background-color: #27ae60;
-            color: white;
+
+        /* Khung bo góc giống thanh tìm kiếm Google */
+        .search-bar-mockup {
+            background: #fff;
+            border: 1px solid #dfe1e5;
+            border-radius: 24px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            transition: box-shadow 0.2s, border-color 0.2s;
         }
-        .btn-download:hover {
-            background-color: #2ecc71;
+
+        .search-bar-mockup:hover {
+            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+            border-color: rgba(223, 225, 229, 0);
         }
-        
-        /* Nút Facebook ở cuối trang */
-        .btn-facebook {
-            background-color: #1877F2;
-            color: white;
-            margin-top: 50px;
-            display: inline-block;
-            padding: 12px 30px;
+
+        p {
             font-size: 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
+            color: #4d5156;
+            margin: 0;
+            line-height: 1.5;
         }
-        .btn-facebook:hover {
-            background-color: #166FE5;
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Nút bấm chuẩn Google */
+        .btn {
+            background-color: #f8f9fa;
+            border: 1px solid #f8f9fa;
+            border-radius: 4px;
+            color: #3c4043;
+            font-size: 14px;
+            padding: 0 16px;
+            line-height: 36px;
+            height: 36px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            box-shadow: 0 1px 1px rgba(0,0,0,.1);
+            border-color: #dadce0;
+            color: #202124;
+        }
+
+        /* Nút màu xanh nổi bật */
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #1b66c9;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            color: #fff;
+            border-color: transparent;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header-box">
-            <h1>Font Việt Linh</h1>
-            <p>Khám phá và tải về các font chữ thiết kế độc quyền. Bạn có thể chọn tải từng font riêng biệt dưới đây.</p>
+    <div class="logo-text">Font Việt Linh</div>
+
+    <div class="content-box">
+        <div class="search-bar-mockup">
+            <p>Khám phá kho lưu trữ mã nguồn mở. Truy cập trực tiếp để xem và lấy về các định dạng font chữ thiết kế độc quyền.</p>
         </div>
+        
+        <div class="buttons">
+            <a href="https://github.com/alphaprinterfont/TEN-REPO-CUA-BAN/tree/main/fonts" target="_blank" class="btn btn-primary">
+                Mở thư mục Fonts
+            </a>
 
-        <div class="font-grid">
-            
-            <div class="font-card">
-                <div class="font-name">Tên Font Việt Linh 01</div>
-                <a href="fonts/file-font-01.ttf" download class="btn btn-download">📥 Tải Font này</a>
-            </div>
-
-            <div class="font-card">
-                <div class="font-name">Tên Font Việt Linh 02</div>
-                <a href="fonts/file-font-02.otf" download class="btn btn-download">📥 Tải Font này</a>
-            </div>
-
-            <div class="font-card">
-                <div class="font-name">Tên Font Việt Linh 03</div>
-                <a href="fonts/file-font-03.zip" download class="btn btn-download">📥 Tải Font này</a>
-            </div>
-            
-            </div>
-
-        <a href="#" target="_blank" class="btn-facebook">💬 Liên Hệ Facebook</a>
+            <a href="#" target="_blank" class="btn">
+                Liên hệ Facebook
+            </a>
+        </div>
     </div>
 
 </body>
