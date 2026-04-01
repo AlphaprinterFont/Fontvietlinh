@@ -42,6 +42,32 @@
             background-color: var(--card-bg); position: sticky; top: 0; z-index: 100;
         }
         
+        /* CSS cho Tiêu đề Gradient và Slogan */
+        .title-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text {
+            margin: 0; 
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            /* Dải màu chuẩn của Google */
+            background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .slogan {
+            font-size: 13px;
+            color: #9aa0a6; /* Màu xám tinh tế để không làm chìm tiêu đề chính */
+            margin-top: 4px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
         .header-actions {
             display: flex;
             flex-wrap: wrap;
@@ -75,7 +101,7 @@
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
         .global-input { width: 100%; padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); }
 
-        /* THANH LỌC & NÚT CHUYỂN GIAO DIỆN (Đã gom vào 1 hàng) */
+        /* THANH LỌC & NÚT CHUYỂN GIAO DIỆN */
         .controls-row {
             display: flex;
             justify-content: space-between;
@@ -106,7 +132,7 @@
 
         /* Thêm class cho giao diện Hàng Ngang */
         .font-gallery.list-view {
-            grid-template-columns: 1fr; /* Ép hiển thị 1 cột duy nhất trải dài */
+            grid-template-columns: 1fr; 
         }
 
         .font-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 15px; }
@@ -123,13 +149,16 @@
         .download-btn:hover { opacity: 0.8; }
 
         .preview-text { font-size: 40px; outline: none; word-wrap: break-word; min-height: 80px; }
-        .hidden { display: none !important; } /* Class dùng để ẩn card khi lọc */
+        .hidden { display: none !important; } 
     </style>
 </head>
 <body data-theme="dark">
 
     <header class="header">
-        <h1 style="margin: 0; font-size: 24px;">Font Việt Linh</h1>
+        <div class="title-group">
+            <h1 class="logo-text">Font Việt Linh</h1>
+            <span class="slogan">Chữ Việt cho người Việt</span>
+        </div>
         
         <div class="header-actions">
             <a href="https://www.facebook.com/FontVietLinh/" target="_blank" class="header-link header-link-primary">
@@ -176,8 +205,8 @@
         const myFonts = [
             { 
                 name: "Bree Serif", 
-                file: "VL-BreeSerif.woff2",         // File cho web đọc (nhẹ)
-                downloadFile: "VL-BreeSerif.ttf",   // File cho khách tải về (.ttf, .otf, hoặc .zip)
+                file: "VL-BreeSerif.woff2",         
+                downloadFile: "VL-BreeSerif.ttf",   
                 category: "serif"
             },
             { 
@@ -200,7 +229,6 @@
         const gallery = document.getElementById('fontGallery');
 
         myFonts.forEach(font => {
-            // 1. Tự động nạp file font vào CSS từ thư mục 'fonts'
             const newStyle = document.createElement('style');
             newStyle.appendChild(document.createTextNode(`
                 @font-face {
@@ -211,7 +239,6 @@
             `));
             document.head.appendChild(newStyle);
 
-            // 2. Tự động tạo thẻ (card) hiển thị font
             const card = document.createElement('div');
             card.className = 'font-card';
             card.setAttribute('data-category', font.category);
@@ -229,10 +256,9 @@
         });
 
         // ---------------------------------------------------------
-        // CÁC CHỨC NĂNG TƯƠNG TÁC (Đổi màu, gõ chữ, lọc font, đổi view)
+        // CÁC CHỨC NĂNG TƯƠNG TÁC
         // ---------------------------------------------------------
         
-        // Chuyển Sáng/Tối
         const themeBtn = document.getElementById('themeBtn');
         themeBtn.addEventListener('click', () => {
             if (document.body.getAttribute('data-theme') === 'dark') {
@@ -244,7 +270,6 @@
             }
         });
 
-        // Cập nhật chữ hàng loạt
         const globalInput = document.getElementById('globalInput');
         globalInput.addEventListener('input', function() {
             const allPreviews = document.querySelectorAll('.preview-text');
@@ -252,7 +277,6 @@
             allPreviews.forEach(preview => preview.innerText = newText);
         });
 
-        // Lọc Font
         const filterBtns = document.querySelectorAll('#filterBar .filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -272,18 +296,17 @@
             });
         });
 
-        // Chuyển đổi giao diện Lưới / Hàng ngang
         const btnGrid = document.getElementById('btnGrid');
         const btnList = document.getElementById('btnList');
 
         btnGrid.addEventListener('click', () => {
-            gallery.classList.remove('list-view'); // Gỡ class list-view để về Grid mặc định
+            gallery.classList.remove('list-view'); 
             btnGrid.classList.add('active');
             btnList.classList.remove('active');
         });
 
         btnList.addEventListener('click', () => {
-            gallery.classList.add('list-view'); // Thêm class list-view để thành 1 cột
+            gallery.classList.add('list-view'); 
             btnList.classList.add('active');
             btnGrid.classList.remove('active');
         });
