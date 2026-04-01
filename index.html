@@ -34,17 +34,17 @@
             --font-title-gradient: linear-gradient(90deg, #8ab4f8, #f28b82);
         }
 
-        /* Giao diện Xanh Google (Blue) */
+        /* Giao diện Xanh Google (Phủ toàn nền) */
         [data-theme="blue"] {
-            --bg-color: #f0f4f9; /* Nền xanh nhạt Google Material */
-            --text-color: #041e49; /* Chữ xanh navy đậm */
-            --card-bg: #ffffff;
-            --border-color: #c2e7ff;
-            --btn-bg: #d3e3fd;
-            --btn-text: #041e49;
-            --btn-active-bg: #0b57d0; /* Xanh Google đậm */
-            --btn-active-text: #ffffff;
-            --font-title-gradient: linear-gradient(90deg, #0b57d0, #ea4335);
+            --bg-color: #1a73e8; /* Nền xanh Google rực rỡ */
+            --text-color: #ffffff; /* Chữ màu trắng */
+            --card-bg: #1557b0; /* Khung card màu xanh đậm hơn để tạo chiều sâu */
+            --border-color: #2b61b3;
+            --btn-bg: #0d4294; /* Nút bấm lúc chưa chọn màu xanh tối */
+            --btn-text: #ffffff;
+            --btn-active-bg: #ffffff; /* Nút được chọn chuyển thành Trắng */
+            --btn-active-text: #1a73e8; /* Chữ trong nút được chọn màu Xanh */
+            --font-title-gradient: linear-gradient(90deg, #ffffff, #fbbc05); /* Tên font: Trắng chuyển Vàng */
         }
 
         /* =========================================
@@ -66,8 +66,16 @@
             background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
         }
+
+        /* Sửa màu logo text khi ở nền Xanh để chữ cái đầu không bị chìm */
+        [data-theme="blue"] .logo-text {
+            background: linear-gradient(90deg, #e8f0fe, #ea4335, #fbbc05, #34a853);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         
         .slogan { font-size: 13px; color: #9aa0a6; margin-top: 4px; font-style: italic; font-weight: bold; }
+        [data-theme="blue"] .slogan { color: #d3e3fd; } /* Chữ slogan sáng hơn ở nền xanh */
 
         .header-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; }
 
@@ -117,6 +125,8 @@
         /* Các khối chức năng */
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
         .global-input { width: 100%; padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); }
+        .global-input::placeholder { color: #888; }
+        [data-theme="blue"] .global-input::placeholder { color: #a8c7fa; }
 
         .controls-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .filter-bar, .view-toggle { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -144,7 +154,8 @@
         }
 
         .font-category-tag { font-weight: bold; font-size: 11px; background: var(--btn-bg); padding: 4px 10px; border-radius: 12px; color: var(--text-color); text-transform: uppercase; letter-spacing: 0.5px;}
-        
+        [data-theme="blue"] .font-category-tag { color: #ffffff; }
+
         .download-btn {
             background-color: var(--btn-active-bg); color: var(--btn-active-text);
             text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: bold; border: 1px solid transparent;
@@ -276,17 +287,15 @@
         
         // 1. Quản lý Theme (Sáng, Tối, Xanh Google)
         const themeDots = document.querySelectorAll('.theme-dot');
-        const savedTheme = localStorage.getItem('theme') || 'dark'; // Mặc định là Tối
+        const savedTheme = localStorage.getItem('theme') || 'dark';
 
         function applyTheme(theme) {
-            // Đổi thuộc tính data-theme của body
             if (theme === 'light') {
                 document.body.removeAttribute('data-theme');
             } else {
                 document.body.setAttribute('data-theme', theme);
             }
             
-            // Cập nhật vòng ring bao quanh icon được chọn
             themeDots.forEach(dot => {
                 if (dot.getAttribute('data-theme-value') === theme) {
                     dot.classList.add('active');
@@ -295,14 +304,11 @@
                 }
             });
             
-            // Lưu vào bộ nhớ cục bộ
             localStorage.setItem('theme', theme);
         }
 
-        // Áp dụng theme đã lưu khi mới load web
         applyTheme(savedTheme);
 
-        // Lắng nghe sự kiện click trên các chấm màu
         themeDots.forEach(dot => {
             dot.addEventListener('click', () => {
                 const selectedTheme = dot.getAttribute('data-theme-value');
