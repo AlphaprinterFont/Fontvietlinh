@@ -166,6 +166,38 @@
             });
         });
     </script>
+// 1. Chỉ cần sửa danh sách này khi có font mới
+const myFonts = [
+    { name: "Việt Linh Thư Pháp", file: "vl-thuphap.woff2", category: "thu-phap" },
+    { name: "Việt Linh Serif", file: "vl-serif.woff2", category: "serif" },
+    // Thêm các font khác ở đây...
+];
 
+// 2. Đoạn code này sẽ tự động tạo giao diện (Bạn không cần chạm vào)
+const gallery = document.getElementById('fontGallery');
+
+myFonts.forEach(font => {
+    const card = document.createElement('div');
+    card.className = 'font-card';
+    card.setAttribute('data-category', font.category);
+    
+    card.innerHTML = `
+        <p class="font-name">${font.name} <span class="font-category-tag">${font.category}</span></p>
+        <div class="preview-text" style="font-family: '${font.name}'" contenteditable="true">
+            Thiết kế thương hiệu Font Việt Linh
+        </div>
+    `;
+    gallery.appendChild(card);
+    
+    // Tự động nạp font vào CSS
+    const newStyle = document.createElement('style');
+    newStyle.appendChild(document.createTextNode(`
+        @font-face {
+            font-family: '${font.name}';
+            src: url('fonts/${font.file}') format('woff2');
+        }
+    `));
+    document.head.appendChild(newStyle);
+});
 </body>
 </html>
