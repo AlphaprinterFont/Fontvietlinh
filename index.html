@@ -44,22 +44,32 @@
         
         .header-actions {
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
             align-items: center;
+            justify-content: flex-end;
         }
 
-        .theme-toggle, .github-link {
-            padding: 10px 20px; cursor: pointer; border: none; border-radius: 20px; font-weight: bold; font-size: 14px; text-decoration: none;
+        /* Nút trên thanh menu */
+        .theme-toggle, .header-link {
+            padding: 8px 16px; cursor: pointer; border: none; border-radius: 20px; 
+            font-weight: bold; font-size: 13px; text-decoration: none;
+            display: inline-block;
         }
         
         .theme-toggle {
             background-color: var(--text-color); color: var(--bg-color);
         }
         
-        .github-link {
+        .header-link {
+            background-color: var(--btn-bg); color: var(--btn-text);
+        }
+        
+        .header-link-primary {
             background-color: var(--btn-active-bg); color: var(--btn-active-text);
         }
-        .github-link:hover { opacity: 0.9; }
+        
+        .header-link:hover, .theme-toggle:hover { opacity: 0.8; }
 
         /* Khu vực nhập text và bộ lọc */
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
@@ -99,11 +109,21 @@
 
     <header class="header">
         <h1 style="margin: 0; font-size: 24px;">Font Việt Linh</h1>
+        
         <div class="header-actions">
-            <a href="https://github.com/alphaprinterfont/TEN-REPO-CUA-BAN/tree/main/fonts" target="_blank" class="github-link">
-                📁 Thư mục Fonts (GitHub)
+            <a href="https://www.facebook.com/FontVietLinh/" target="_blank" class="header-link header-link-primary">
+                🛒 Mua Font Việt Linh
             </a>
-            <button class="theme-toggle" id="themeBtn">Chuyển sang Giao diện Sáng</button>
+            
+            <a href="https://docs.google.com/spreadsheets/d/1FJZfdUx50TFt2mWM11f9i2Lm8f2Bsxum/edit?usp=sharing&ouid=108759078861426831168&rtpof=true&sd=true" target="_blank" class="header-link">
+                📚 Bộ 4500 Font Việt Hoá
+            </a>
+            
+            <a href="https://docs.google.com/spreadsheets/d/1LCw8ESaDGv3I9PAAimqbUHFhhIUR6CWmPdkkwObyQYY/edit?usp=sharing" target="_blank" class="header-link">
+                📅 Bộ font T1-T6/2026
+            </a>
+
+            <button class="theme-toggle" id="themeBtn">Giao diện Sáng</button>
         </div>
     </header>
 
@@ -187,10 +207,10 @@
         themeBtn.addEventListener('click', () => {
             if (document.body.getAttribute('data-theme') === 'dark') {
                 document.body.removeAttribute('data-theme');
-                themeBtn.innerText = 'Chuyển sang Giao diện Tối';
+                themeBtn.innerText = 'Giao diện Tối';
             } else {
                 document.body.setAttribute('data-theme', 'dark');
-                themeBtn.innerText = 'Chuyển sang Giao diện Sáng';
+                themeBtn.innerText = 'Giao diện Sáng';
             }
         });
 
