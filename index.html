@@ -143,22 +143,25 @@
 
     <script>
         // ---------------------------------------------------------
-        // KHO DỮ LIỆU FONT CỦA BẠN (CHỈ CẦN SỬA Ở ĐÂY KHI CÓ FONT MỚI)
+        // KHO DỮ LIỆU FONT CỦA BẠN
         // ---------------------------------------------------------
         const myFonts = [
             { 
                 name: "Bree Serif", 
-                file: "VL-BreeSerif.woff2", 
+                file: "VL-BreeSerif.woff2",         // File cho web đọc (nhẹ)
+                downloadFile: "VL-BreeSerif.ttf",   // File cho khách tải về (.ttf, .otf, hoặc .zip)
                 category: "serif"
             },
             { 
-                name: "Việt Linh Hiện Đại (Demo)", 
-                file: "vl-hiendai.woff2", 
-                category: "sans-serif"
+                name: "Belgrano", 
+                file: "Vl-Belgrano.woff2", 
+                downloadFile: "Vl-Belgrano.ttf", 
+                category: "serif"
             },
             { 
-                name: "Việt Linh Phá Cách (Demo)", 
-                file: "vl-phacach.woff2", 
+                name: "McLaren", 
+                file: "VL-McLaren.woff2", 
+                downloadFile: "VL-McLaren.zip",   // Nếu bạn muốn họ tải file nén
                 category: "display"
             }
         ];
