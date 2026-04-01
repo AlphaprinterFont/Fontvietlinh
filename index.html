@@ -17,7 +17,6 @@
             --btn-text: #202124;
             --btn-active-bg: #1a73e8; 
             --btn-active-text: #ffffff;
-            /* Màu chữ gradient cho tên font ở giao diện Sáng */
             --font-title-gradient: linear-gradient(90deg, #1a73e8, #ea4335);
         }
 
@@ -30,7 +29,6 @@
             --btn-text: #e8eaed;
             --btn-active-bg: #8ab4f8; 
             --btn-active-text: #202124;
-            /* Màu chữ gradient cho tên font ở giao diện Tối (sáng hơn để dễ đọc) */
             --font-title-gradient: linear-gradient(90deg, #8ab4f8, #f28b82);
         }
 
@@ -46,75 +44,33 @@
             background-color: var(--card-bg); position: sticky; top: 0; z-index: 100;
         }
         
-        /* CSS cho Tiêu đề Gradient và Slogan */
-        .title-group {
-            display: flex;
-            flex-direction: column;
-        }
+        .title-group { display: flex; flex-direction: column; }
         
         .logo-text {
-            margin: 0; 
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: -1px;
+            margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -1px;
             background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
         }
         
-        .slogan {
-            font-size: 13px;
-            color: #9aa0a6;
-            margin-top: 4px;
-            font-style: italic;
-            font-weight: bold;
-        }
+        .slogan { font-size: 13px; color: #9aa0a6; margin-top: 4px; font-style: italic; font-weight: bold; }
 
-        .header-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            justify-content: flex-end;
-        }
+        .header-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; }
 
-        /* Nút trên thanh menu */
         .theme-toggle, .header-link {
             padding: 8px 16px; cursor: pointer; border: none; border-radius: 20px; 
-            font-weight: bold; font-size: 13px; text-decoration: none;
-            display: inline-block;
+            font-weight: bold; font-size: 13px; text-decoration: none; display: inline-block;
         }
         
-        .theme-toggle {
-            background-color: var(--text-color); color: var(--bg-color);
-        }
-        
-        .header-link {
-            background-color: var(--btn-bg); color: var(--btn-text);
-        }
-        
-        .header-link-primary {
-            background-color: var(--btn-active-bg); color: var(--btn-active-text);
-        }
-        
+        .theme-toggle { background-color: var(--text-color); color: var(--bg-color); }
+        .header-link { background-color: var(--btn-bg); color: var(--btn-text); }
+        .header-link-primary { background-color: var(--btn-active-bg); color: var(--btn-active-text); }
         .header-link:hover, .theme-toggle:hover { opacity: 0.8; }
 
-        /* Khu vực nhập text và bộ lọc */
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
         .global-input { width: 100%; padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); }
 
-        /* THANH LỌC & NÚT CHUYỂN GIAO DIỆN */
-        .controls-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; }
-        .view-toggle { display: flex; gap: 10px; }
+        .controls-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .filter-bar, .view-toggle { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .filter-btn {
             padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 20px;
@@ -126,32 +82,18 @@
         /* =========================================
            3. LƯỚI HIỂN THỊ CÁC FONT (GALLERY)
            ========================================= */
-        .font-gallery { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 24px; 
-            padding: 0 40px 40px 40px; 
-        }
-
-        .font-gallery.list-view {
-            grid-template-columns: 1fr; 
-        }
-
+        .font-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; padding: 0 40px 40px 40px; }
+        .font-gallery.list-view { grid-template-columns: 1fr; }
         .font-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 15px; }
         
         .font-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .font-name { margin: 0; display: flex; align-items: center; gap: 10px; }
+        .font-name { margin: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;}
         
-        /* CSS MỚI: Chỉ áp dụng màu chuyển sắc cho tên Font */
         .font-title {
-            font-size: 18px;
-            font-weight: 900;
-            background: var(--font-title-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 18px; font-weight: 900;
+            background: var(--font-title-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Tag phân loại font vẫn giữ màu mặc định theo nền */
         .font-category-tag { font-weight: bold; font-size: 11px; background: var(--btn-bg); padding: 4px 10px; border-radius: 12px; color: var(--text-color); text-transform: uppercase; letter-spacing: 0.5px;}
         
         .download-btn {
@@ -162,6 +104,32 @@
 
         .preview-text { font-size: 40px; outline: none; word-wrap: break-word; min-height: 80px; padding-top: 10px; }
         .hidden { display: none !important; } 
+
+        /* =========================================
+           4. RESPONSIVE - TỐI ƯU CHO ĐIỆN THOẠI
+           ========================================= */
+        @media (max-width: 768px) {
+            /* Giảm khoảng cách lề tổng thể */
+            .header { padding: 15px 20px; gap: 12px; }
+            .controls-section { padding: 15px 20px; gap: 15px; }
+            .font-gallery { padding: 0 20px 20px 20px; gap: 15px; grid-template-columns: 1fr; /* Luôn 1 cột trên mobile */ }
+            
+            /* Giảm kích thước khung tìm kiếm */
+            .global-input { padding: 12px; font-size: 16px; }
+            
+            /* Nhỏ các nút bấm trên Menu và Lọc */
+            .theme-toggle, .header-link { padding: 6px 12px; font-size: 12px; }
+            .filter-btn { padding: 6px 12px; font-size: 12px; }
+            
+            /* Thu gọn Card hiển thị font */
+            .font-card { padding: 16px; gap: 12px; }
+            .font-title { font-size: 16px; }
+            .font-category-tag { font-size: 10px; padding: 3px 8px; }
+            .download-btn { padding: 6px 12px; font-size: 12px; }
+            
+            /* Thu nhỏ chữ xem trước (Quan trọng nhất) */
+            .preview-text { font-size: 28px; min-height: 50px; padding-top: 5px; }
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -174,15 +142,15 @@
         
         <div class="header-actions">
             <a href="https://www.facebook.com/FontVietLinh/" target="_blank" class="header-link header-link-primary">
-                🛒 Mua Font Việt Linh
+                🛒 Mua Font
             </a>
             
             <a href="https://docs.google.com/spreadsheets/d/1FJZfdUx50TFt2mWM11f9i2Lm8f2Bsxum/edit?usp=sharing&ouid=108759078861426831168&rtpof=true&sd=true" target="_blank" class="header-link">
-                📚 Bộ 4500 Font Việt Hoá
+                📚 4500 Font
             </a>
             
             <a href="https://docs.google.com/spreadsheets/d/1LCw8ESaDGv3I9PAAimqbUHFhhIUR6CWmPdkkwObyQYY/edit?usp=sharing" target="_blank" class="header-link">
-                📅 Bộ font T1-T6/2026
+                📅 Font T1-T6/2026
             </a>
 
             <button class="theme-toggle" id="themeBtn">Giao diện Sáng</button>
@@ -196,14 +164,14 @@
             <div class="filter-bar" id="filterBar">
                 <button class="filter-btn active" data-filter="all">Tất cả</button>
                 <button class="filter-btn" data-filter="script">Script</button>
-                <button class="filter-btn" data-filter="sans-serif">Sans-Serif (Không chân)</button>
-                <button class="filter-btn" data-filter="serif">Serif (Có chân)</button>
-                <button class="filter-btn" data-filter="display">Trang trí (Display)</button>
+                <button class="filter-btn" data-filter="sans-serif">Sans-Serif</button>
+                <button class="filter-btn" data-filter="serif">Serif</button>
+                <button class="filter-btn" data-filter="display">Trang trí</button>
             </div>
 
             <div class="view-toggle">
                 <button class="filter-btn active" id="btnGrid">⊞ Lưới</button>
-                <button class="filter-btn" id="btnList">𝌸 Hàng ngang</button>
+                <button class="filter-btn" id="btnList">𝌸 Ngang</button>
             </div>
         </div>
     </div>
@@ -215,28 +183,13 @@
         // KHO DỮ LIỆU FONT CỦA BẠN
         // ---------------------------------------------------------
         const myFonts = [
-            { 
-                name: "Bree Serif", 
-                file: "VL-BreeSerif.woff2",         
-                downloadFile: "VL-BreeSerif.ttf",   
-                category: "serif"
-            },
-            { 
-                name: "Belgrano", 
-                file: "VL-Belgrano.woff2", 
-                downloadFile: "VL-Belgrano.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "McLaren", 
-                file: "VL-McLaren.woff2", 
-                downloadFile: "VL-McLaren.ttf",   
-                category: "display"
-            }
+            { name: "Bree Serif", file: "VL-BreeSerif.woff2", downloadFile: "VL-BreeSerif.ttf", category: "serif" },
+            { name: "Belgrano", file: "VL-Belgrano.woff2", downloadFile: "VL-Belgrano.ttf", category: "serif" },
+            { name: "McLaren", file: "VL-McLaren.woff2", downloadFile: "VL-McLaren.ttf", category: "display" }
         ];
 
         // ---------------------------------------------------------
-        // HỆ THỐNG TỰ ĐỘNG TẠO GIAO DIỆN TỪ DANH SÁCH TRÊN
+        // HỆ THỐNG TỰ ĐỘNG TẠO GIAO DIỆN
         // ---------------------------------------------------------
         const gallery = document.getElementById('fontGallery');
 
@@ -255,14 +208,13 @@
             card.className = 'font-card';
             card.setAttribute('data-category', font.category);
             
-            // ĐÃ CẬP NHẬT: Tách riêng tên font vào class .font-title
             card.innerHTML = `
                 <div class="font-header">
                     <div class="font-name">
                         <span class="font-title">${font.name}</span> 
                         <span class="font-category-tag">${font.category}</span>
                     </div>
-                    <a href="fonts/${font.downloadFile}" download class="download-btn">📥 Tải font này</a>
+                    <a href="fonts/${font.downloadFile}" download class="download-btn">📥 Tải font</a>
                 </div>
                 <div class="preview-text" style="font-family: '${font.name}'" contenteditable="true" spellcheck="false">
                     Thiết kế thương hiệu
