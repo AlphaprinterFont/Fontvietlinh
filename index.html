@@ -6,8 +6,9 @@
     <title>Thư viện Font Việt Linh</title>
     <style>
         /* =========================================
-           1. KHAI BÁO BIẾN CHO GIAO DIỆN SÁNG / TỐI
+           1. KHAI BÁO BIẾN CHO CÁC GIAO DIỆN
            ========================================= */
+        /* Giao diện Sáng (Mặc định) */
         :root {
             --bg-color: #f4f4f4;
             --text-color: #202124;
@@ -20,6 +21,7 @@
             --font-title-gradient: linear-gradient(90deg, #1a73e8, #ea4335);
         }
 
+        /* Giao diện Tối */
         [data-theme="dark"] {
             --bg-color: #121212;
             --text-color: #ffffff;
@@ -30,6 +32,19 @@
             --btn-active-bg: #8ab4f8; 
             --btn-active-text: #202124;
             --font-title-gradient: linear-gradient(90deg, #8ab4f8, #f28b82);
+        }
+
+        /* Giao diện Xanh Google (Blue) */
+        [data-theme="blue"] {
+            --bg-color: #f0f4f9; /* Nền xanh nhạt Google Material */
+            --text-color: #041e49; /* Chữ xanh navy đậm */
+            --card-bg: #ffffff;
+            --border-color: #c2e7ff;
+            --btn-bg: #d3e3fd;
+            --btn-text: #041e49;
+            --btn-active-bg: #0b57d0; /* Xanh Google đậm */
+            --btn-active-text: #ffffff;
+            --font-title-gradient: linear-gradient(90deg, #0b57d0, #ea4335);
         }
 
         /* =========================================
@@ -56,16 +71,50 @@
 
         .header-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; }
 
-        .theme-toggle, .header-link {
+        .header-link {
             padding: 8px 16px; cursor: pointer; border: none; border-radius: 20px; 
             font-weight: bold; font-size: 13px; text-decoration: none; display: inline-block;
+            background-color: var(--btn-bg); color: var(--btn-text);
         }
-        
-        .theme-toggle { background-color: var(--text-color); color: var(--bg-color); }
-        .header-link { background-color: var(--btn-bg); color: var(--btn-text); }
         .header-link-primary { background-color: var(--btn-active-bg); color: var(--btn-active-text); }
-        .header-link:hover, .theme-toggle:hover { opacity: 0.8; }
+        .header-link:hover { opacity: 0.8; }
 
+        /* KHU VỰC CHỌN MÀU THEME (ICON MÀU) */
+        .theme-selector {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-left: 10px;
+        }
+        .theme-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .theme-dot:hover { transform: scale(1.1); }
+        
+        /* Hiệu ứng vòng tròn bao quanh khi được chọn */
+        .theme-dot::after {
+            content: '';
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .theme-dot.active::after {
+            border-color: var(--text-color); 
+        }
+
+        .dot-light { background-color: #f4f4f4; border: 1px solid #ccc; }
+        .dot-dark { background-color: #202124; border: 1px solid #000; }
+        .dot-blue { background-color: #1a73e8; border: 1px solid #1557b0; }
+
+        /* Các khối chức năng */
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
         .global-input { width: 100%; padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); }
 
@@ -109,25 +158,19 @@
            4. RESPONSIVE - TỐI ƯU CHO ĐIỆN THOẠI
            ========================================= */
         @media (max-width: 768px) {
-            /* Giảm khoảng cách lề tổng thể */
             .header { padding: 15px 20px; gap: 12px; }
             .controls-section { padding: 15px 20px; gap: 15px; }
-            .font-gallery { padding: 0 20px 20px 20px; gap: 15px; grid-template-columns: 1fr; /* Luôn 1 cột trên mobile */ }
+            .font-gallery { padding: 0 20px 20px 20px; gap: 15px; grid-template-columns: 1fr; }
             
-            /* Giảm kích thước khung tìm kiếm */
             .global-input { padding: 12px; font-size: 16px; }
-            
-            /* Nhỏ các nút bấm trên Menu và Lọc */
-            .theme-toggle, .header-link { padding: 6px 12px; font-size: 12px; }
+            .header-link { padding: 6px 12px; font-size: 12px; }
             .filter-btn { padding: 6px 12px; font-size: 12px; }
             
-            /* Thu gọn Card hiển thị font */
             .font-card { padding: 16px; gap: 12px; }
             .font-title { font-size: 16px; }
             .font-category-tag { font-size: 10px; padding: 3px 8px; }
             .download-btn { padding: 6px 12px; font-size: 12px; }
             
-            /* Thu nhỏ chữ xem trước (Quan trọng nhất) */
             .preview-text { font-size: 28px; min-height: 50px; padding-top: 5px; }
         }
     </style>
@@ -153,7 +196,11 @@
                 📅 Font T1-T6/2026
             </a>
 
-            <button class="theme-toggle" id="themeBtn">Giao diện Sáng</button>
+            <div class="theme-selector">
+                <div class="theme-dot dot-light" data-theme-value="light" title="Giao diện Sáng"></div>
+                <div class="theme-dot dot-dark" data-theme-value="dark" title="Giao diện Tối"></div>
+                <div class="theme-dot dot-blue" data-theme-value="blue" title="Giao diện Xanh Google"></div>
+            </div>
         </div>
     </header>
 
@@ -227,29 +274,43 @@
         // CÁC CHỨC NĂNG TƯƠNG TÁC & LƯU TRỮ (LOCAL STORAGE)
         // ---------------------------------------------------------
         
-        const themeBtn = document.getElementById('themeBtn');
-        const savedTheme = localStorage.getItem('theme') || 'dark';
+        // 1. Quản lý Theme (Sáng, Tối, Xanh Google)
+        const themeDots = document.querySelectorAll('.theme-dot');
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Mặc định là Tối
 
-        if (savedTheme === 'light') {
-            document.body.removeAttribute('data-theme');
-            themeBtn.innerText = 'Giao diện Tối';
-        } else {
-            document.body.setAttribute('data-theme', 'dark');
-            themeBtn.innerText = 'Giao diện Sáng';
+        function applyTheme(theme) {
+            // Đổi thuộc tính data-theme của body
+            if (theme === 'light') {
+                document.body.removeAttribute('data-theme');
+            } else {
+                document.body.setAttribute('data-theme', theme);
+            }
+            
+            // Cập nhật vòng ring bao quanh icon được chọn
+            themeDots.forEach(dot => {
+                if (dot.getAttribute('data-theme-value') === theme) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // Lưu vào bộ nhớ cục bộ
+            localStorage.setItem('theme', theme);
         }
 
-        themeBtn.addEventListener('click', () => {
-            if (document.body.getAttribute('data-theme') === 'dark') {
-                document.body.removeAttribute('data-theme');
-                themeBtn.innerText = 'Giao diện Tối';
-                localStorage.setItem('theme', 'light'); 
-            } else {
-                document.body.setAttribute('data-theme', 'dark');
-                themeBtn.innerText = 'Giao diện Sáng';
-                localStorage.setItem('theme', 'dark'); 
-            }
+        // Áp dụng theme đã lưu khi mới load web
+        applyTheme(savedTheme);
+
+        // Lắng nghe sự kiện click trên các chấm màu
+        themeDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const selectedTheme = dot.getAttribute('data-theme-value');
+                applyTheme(selectedTheme);
+            });
         });
 
+        // 2. Quản lý Giao diện Lưới / Ngang
         const btnGrid = document.getElementById('btnGrid');
         const btnList = document.getElementById('btnList');
         const savedView = localStorage.getItem('view') || 'grid'; 
@@ -278,6 +339,7 @@
             localStorage.setItem('view', 'list'); 
         });
 
+        // 3. Quản lý Filter & Gõ chữ
         const globalInput = document.getElementById('globalInput');
         globalInput.addEventListener('input', function() {
             const allPreviews = document.querySelectorAll('.preview-text');
