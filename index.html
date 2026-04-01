@@ -17,6 +17,8 @@
             --btn-text: #202124;
             --btn-active-bg: #1a73e8; 
             --btn-active-text: #ffffff;
+            /* Màu chữ gradient cho tên font ở giao diện Sáng */
+            --font-title-gradient: linear-gradient(90deg, #1a73e8, #ea4335);
         }
 
         [data-theme="dark"] {
@@ -28,6 +30,8 @@
             --btn-text: #e8eaed;
             --btn-active-bg: #8ab4f8; 
             --btn-active-text: #202124;
+            /* Màu chữ gradient cho tên font ở giao diện Tối (sáng hơn để dễ đọc) */
+            --font-title-gradient: linear-gradient(90deg, #8ab4f8, #f28b82);
         }
 
         /* =========================================
@@ -53,7 +57,6 @@
             font-size: 28px;
             font-weight: 900;
             letter-spacing: -1px;
-            /* Dải màu chuẩn của Google */
             background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -62,7 +65,7 @@
         
         .slogan {
             font-size: 13px;
-            color: #9aa0a6; /* Màu xám tinh tế để không làm chìm tiêu đề chính */
+            color: #9aa0a6;
             margin-top: 4px;
             font-style: italic;
             font-weight: bold;
@@ -130,7 +133,6 @@
             padding: 0 40px 40px 40px; 
         }
 
-        /* Thêm class cho giao diện Hàng Ngang */
         .font-gallery.list-view {
             grid-template-columns: 1fr; 
         }
@@ -138,17 +140,27 @@
         .font-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 15px; }
         
         .font-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .font-name { font-size: 15px; font-weight: bold; color: #9aa0a6; margin: 0; display: flex; align-items: center; gap: 10px; }
-        .font-category-tag { font-weight: normal; font-size: 12px; background: var(--btn-bg); padding: 2px 8px; border-radius: 10px; color: var(--btn-text); text-transform: capitalize; }
+        .font-name { margin: 0; display: flex; align-items: center; gap: 10px; }
         
-        /* CSS cho Nút Tải về */
+        /* CSS MỚI: Chỉ áp dụng màu chuyển sắc cho tên Font */
+        .font-title {
+            font-size: 18px;
+            font-weight: 900;
+            background: var(--font-title-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tag phân loại font vẫn giữ màu mặc định theo nền */
+        .font-category-tag { font-weight: bold; font-size: 11px; background: var(--btn-bg); padding: 4px 10px; border-radius: 12px; color: var(--text-color); text-transform: uppercase; letter-spacing: 0.5px;}
+        
         .download-btn {
             background-color: var(--btn-active-bg); color: var(--btn-active-text);
-            text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; border: 1px solid transparent;
+            text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: bold; border: 1px solid transparent;
         }
-        .download-btn:hover { opacity: 0.8; }
+        .download-btn:hover { opacity: 0.8; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        .preview-text { font-size: 40px; outline: none; word-wrap: break-word; min-height: 80px; }
+        .preview-text { font-size: 40px; outline: none; word-wrap: break-word; min-height: 80px; padding-top: 10px; }
         .hidden { display: none !important; } 
     </style>
 </head>
@@ -243,9 +255,13 @@
             card.className = 'font-card';
             card.setAttribute('data-category', font.category);
             
+            // ĐÃ CẬP NHẬT: Tách riêng tên font vào class .font-title
             card.innerHTML = `
                 <div class="font-header">
-                    <p class="font-name">${font.name} <span class="font-category-tag">${font.category}</span></p>
+                    <div class="font-name">
+                        <span class="font-title">${font.name}</span> 
+                        <span class="font-category-tag">${font.category}</span>
+                    </div>
                     <a href="fonts/${font.downloadFile}" download class="download-btn">📥 Tải font này</a>
                 </div>
                 <div class="preview-text" style="font-family: '${font.name}'" contenteditable="true" spellcheck="false">
@@ -256,18 +272,58 @@
         });
 
         // ---------------------------------------------------------
-        // CÁC CHỨC NĂNG TƯƠNG TÁC
+        // CÁC CHỨC NĂNG TƯƠNG TÁC & LƯU TRỮ (LOCAL STORAGE)
         // ---------------------------------------------------------
         
         const themeBtn = document.getElementById('themeBtn');
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+
+        if (savedTheme === 'light') {
+            document.body.removeAttribute('data-theme');
+            themeBtn.innerText = 'Giao diện Tối';
+        } else {
+            document.body.setAttribute('data-theme', 'dark');
+            themeBtn.innerText = 'Giao diện Sáng';
+        }
+
         themeBtn.addEventListener('click', () => {
             if (document.body.getAttribute('data-theme') === 'dark') {
                 document.body.removeAttribute('data-theme');
                 themeBtn.innerText = 'Giao diện Tối';
+                localStorage.setItem('theme', 'light'); 
             } else {
                 document.body.setAttribute('data-theme', 'dark');
                 themeBtn.innerText = 'Giao diện Sáng';
+                localStorage.setItem('theme', 'dark'); 
             }
+        });
+
+        const btnGrid = document.getElementById('btnGrid');
+        const btnList = document.getElementById('btnList');
+        const savedView = localStorage.getItem('view') || 'grid'; 
+
+        if (savedView === 'list') {
+            gallery.classList.add('list-view'); 
+            btnList.classList.add('active');
+            btnGrid.classList.remove('active');
+        } else {
+            gallery.classList.remove('list-view'); 
+            btnGrid.classList.add('active');
+            btnList.classList.remove('active');
+        }
+
+        btnGrid.addEventListener('click', () => {
+            gallery.classList.remove('list-view'); 
+            btnGrid.classList.add('active');
+            btnList.classList.remove('active');
+            localStorage.setItem('view', 'grid'); 
+        });
+
+        btnList.addEventListener('click', () => {
+            gallery.classList.add('list-view'); 
+            btnList.classList.add('active');
+            btnGrid.classList.remove('active');
+            localStorage.setItem('view', 'list'); 
         });
 
         const globalInput = document.getElementById('globalInput');
@@ -294,21 +350,6 @@
                     }
                 });
             });
-        });
-
-        const btnGrid = document.getElementById('btnGrid');
-        const btnList = document.getElementById('btnList');
-
-        btnGrid.addEventListener('click', () => {
-            gallery.classList.remove('list-view'); 
-            btnGrid.classList.add('active');
-            btnList.classList.remove('active');
-        });
-
-        btnList.addEventListener('click', () => {
-            gallery.classList.add('list-view'); 
-            btnList.classList.add('active');
-            btnGrid.classList.remove('active');
         });
     </script>
 </body>
