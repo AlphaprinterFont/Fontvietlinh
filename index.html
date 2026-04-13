@@ -98,9 +98,17 @@
         .dot-blue { background-color: #1a73e8; border: 1px solid #1557b0; }
 
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
-        .global-input { width: 100%; padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); }
+        
+        /* CSS MỚI: Bố cục cho hàng chứa Input và Tìm kiếm */
+        .input-row { display: flex; gap: 15px; flex-wrap: wrap; width: 100%; }
+        .global-input { padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); outline: none;}
+        .global-input:focus { border-color: var(--btn-active-bg); }
         .global-input::placeholder { color: #888; }
         [data-theme="blue"] .global-input::placeholder { color: #a8c7fa; }
+        
+        /* Tỉ lệ chia không gian: Ô gõ chữ chiếm nhiều hơn ô tìm kiếm */
+        .test-input { flex: 2; min-width: 250px; }
+        .search-input { flex: 1; min-width: 200px; font-size: 16px; }
 
         .controls-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .filter-bar, .view-toggle { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -148,7 +156,7 @@
             .controls-section { padding: 15px 20px; gap: 15px; }
             .font-gallery { padding: 0 20px 20px 20px; gap: 15px; grid-template-columns: 1fr; }
             
-            .global-input { padding: 12px; font-size: 16px; }
+            .global-input { padding: 12px; }
             .header-link { padding: 6px 12px; font-size: 12px; }
             .filter-btn { padding: 6px 12px; font-size: 12px; }
             
@@ -156,7 +164,6 @@
             .font-title { font-size: 16px; }
             .font-category-tag { font-size: 10px; padding: 3px 8px; }
             
-            /* Giữ nút tải nhỏ gọn trên điện thoại */
             .download-btn { padding: 5px 10px; font-size: 11px; border-radius: 5px; }
             
             .preview-text { font-size: 28px; min-height: 50px; padding-top: 5px; }
@@ -193,7 +200,10 @@
     </header>
 
     <div class="controls-section">
-        <input type="text" class="global-input" id="globalInput" placeholder="Gõ câu gì đó để thử tất cả các font..." value="Thương hiệu độc quyền">
+        <div class="input-row">
+            <input type="text" class="global-input test-input" id="globalInput" placeholder="Gõ câu gì đó để thử tất cả các font..." value="Thương hiệu độc quyền">
+            <input type="text" class="global-input search-input" id="searchInput" placeholder="🔍 Tìm kiếm tên font...">
+        </div>
         
         <div class="controls-row">
             <div class="filter-bar" id="filterBar">
@@ -217,99 +227,23 @@
 
     <script>
         // ---------------------------------------------------------
-        // KHO DỮ LIỆU FONT CỦA BẠN (Đã xóa các trường số lượng tải)
+        // KHO DỮ LIỆU FONT CỦA BẠN
         // ---------------------------------------------------------
         const myFonts = [
-            { 
-                name: "Bree Serif", 
-                file: "VL-BreeSerif.woff2", 
-                downloadFile: "VL-BreeSerif.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "Belgrano", 
-                file: "VL-Belgrano.woff2", 
-                downloadFile: "VL-Belgrano.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "McLaren", 
-                file: "VL-McLaren.woff2", 
-                downloadFile: "VL-McLaren.ttf", 
-                category: "display"
-            },
-            { 
-                name: "Slabo 27px", 
-                file: "VL-Slabo27px.woff2", 
-                downloadFile: "VL-Slabo27px.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "Varela Round", 
-                file: "VarelaRound.woff2", 
-                downloadFile: "VarelaRound.ttf", 
-                category: "round"
-            },
-            { 
-                name: "Anta", 
-                file: "VL-Anta.woff2", 
-                downloadFile: "VL-Anta.ttf", 
-                category: "sans-serif"
-            },
-            { 
-                name: "Galindo", 
-                file: "VL-Galindo.woff2", 
-                downloadFile: "VL-Galindo.ttf", 
-                category: "display"
-            },
-            { 
-                name: "Port Lligat Sans", 
-                file: "VL-PortLligatSans.woff2", 
-                downloadFile: "VL-PortLligatSans.ttf", 
-                category: "sans-serif"
-            },
-            { 
-                name: "Acme", 
-                file: "VLAcme.woff2", 
-                downloadFile: "VLAcme.ttf", 
-                category: "sans-serif"
-            },
-            { 
-                name: "Noticia Text", 
-                file: "NoticiaText-Regular.woff2", 
-                downloadFile: "NoticiaText-Regular.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "Noticia Text Italic", 
-                file: "NoticiaText-Italic.woff2", 
-                downloadFile: "NoticiaText-Italic.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "Noticia Text Bold", 
-                file: "NoticiaText-Bold.woff2", 
-                downloadFile: "NoticiaText-Bold.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "Noticia Text Bold Italic", 
-                file: "NoticiaText-BoldItalic.woff2", 
-                downloadFile: "NoticiaText-BoldItalic.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "Alike", 
-                file: "VLAlike.woff2", 
-                downloadFile: "VLAlike.ttf", 
-                category: "serif"
-            },
-            { 
-                name: "Varela Round", 
-                file: "VarelaRound.woff2", 
-                downloadFile: "VarelaRound.ttf", 
-                category: "round"
-            },
+            { name: "Bree Serif", file: "VL-BreeSerif.woff2", downloadFile: "VL-BreeSerif.ttf", category: "serif" },
+            { name: "Belgrano", file: "VL-Belgrano.woff2", downloadFile: "VL-Belgrano.ttf", category: "serif" },
+            { name: "McLaren", file: "VL-McLaren.woff2", downloadFile: "VL-McLaren.ttf", category: "display" },
+            { name: "Slabo 27px", file: "VL-Slabo27px.woff2", downloadFile: "VL-Slabo27px.ttf", category: "serif" },
+            { name: "Varela Round", file: "VarelaRound.woff2", downloadFile: "VarelaRound.ttf", category: "round" },
+            { name: "Anta", file: "VL-Anta.woff2", downloadFile: "VL-Anta.ttf", category: "sans-serif" },
+            { name: "Galindo", file: "VL-Galindo.woff2", downloadFile: "VL-Galindo.ttf", category: "display" },
+            { name: "Port Lligat Sans", file: "VL-PortLligatSans.woff2", downloadFile: "VL-PortLligatSans.ttf", category: "sans-serif" },
+            { name: "Acme", file: "VLAcme.woff2", downloadFile: "VLAcme.ttf", category: "sans-serif" },
+            { name: "Noticia Text", file: "NoticiaText-Regular.woff2", downloadFile: "NoticiaText-Regular.ttf", category: "serif" },
+            { name: "Noticia Text Italic", file: "NoticiaText-Italic.woff2", downloadFile: "NoticiaText-Italic.ttf", category: "serif" },
+            { name: "Noticia Text Bold", file: "NoticiaText-Bold.woff2", downloadFile: "NoticiaText-Bold.ttf", category: "serif" },
+            { name: "Noticia Text Bold Italic", file: "NoticiaText-BoldItalic.woff2", downloadFile: "NoticiaText-BoldItalic.ttf", category: "serif" },
+            { name: "Alike", file: "VLAlike.woff2", downloadFile: "VLAlike.ttf", category: "serif" }
         ];
 
         // ---------------------------------------------------------
@@ -332,7 +266,6 @@
             card.className = 'font-card';
             card.setAttribute('data-category', font.category);
             
-            // Xóa code in số đếm, chỉ giữ lại nút tải gọn gàng
             card.innerHTML = `
                 <div class="font-header">
                     <div class="font-name">
@@ -352,6 +285,7 @@
         // CÁC CHỨC NĂNG TƯƠNG TÁC & LƯU TRỮ (LOCAL STORAGE)
         // ---------------------------------------------------------
         
+        // --- CHUYỂN ĐỔI THEME ---
         const themeDots = document.querySelectorAll('.theme-dot');
         const savedTheme = localStorage.getItem('theme') || 'dark';
 
@@ -377,11 +311,11 @@
 
         themeDots.forEach(dot => {
             dot.addEventListener('click', () => {
-                const selectedTheme = dot.getAttribute('data-theme-value');
-                applyTheme(selectedTheme);
+                applyTheme(dot.getAttribute('data-theme-value'));
             });
         });
 
+        // --- CHUYỂN ĐỔI CHẾ ĐỘ VIEW (LƯỚI/NGANG) ---
         const btnGrid = document.getElementById('btnGrid');
         const btnList = document.getElementById('btnList');
         const savedView = localStorage.getItem('view') || 'grid'; 
@@ -410,6 +344,7 @@
             localStorage.setItem('view', 'list'); 
         });
 
+        // --- GÕ CHỮ THỬ NGHIỆM ĐỒNG LOẠT ---
         const globalInput = document.getElementById('globalInput');
         globalInput.addEventListener('input', function() {
             const allPreviews = document.querySelectorAll('.preview-text');
@@ -417,24 +352,49 @@
             allPreviews.forEach(preview => preview.innerText = newText);
         });
 
+        // --- HỆ THỐNG LỌC & TÌM KIẾM ĐƯỢC KẾT HỢP ---
+        const searchInput = document.getElementById('searchInput');
         const filterBtns = document.querySelectorAll('#filterBar .filter-btn');
+        let currentCategory = 'all';
+
+        // Hàm áp dụng cả tìm kiếm text và lọc danh mục
+        function applyFiltersAndSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const fontCards = document.querySelectorAll('.font-card');
+            
+            fontCards.forEach(card => {
+                // Lấy tên font trong thẻ span.font-title
+                const fontName = card.querySelector('.font-title').innerText.toLowerCase();
+                const fontCategory = card.getAttribute('data-category');
+                
+                // Kiểm tra xem card có khớp với ô tìm kiếm và danh mục hiện tại không
+                const matchesSearch = fontName.includes(searchTerm);
+                const matchesCategory = (currentCategory === 'all' || currentCategory === fontCategory);
+                
+                if (matchesSearch && matchesCategory) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Bắt sự kiện khi click chọn Danh mục
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
-                const filterValue = btn.getAttribute('data-filter');
-                const fontCards = document.querySelectorAll('.font-card');
-                
-                fontCards.forEach(card => {
-                    if (filterValue === 'all' || filterValue === card.getAttribute('data-category')) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+                currentCategory = btn.getAttribute('data-filter');
+                applyFiltersAndSearch(); // Gọi hàm kiểm tra chung
             });
         });
+
+        // Bắt sự kiện khi gõ vào ô Tìm kiếm
+        searchInput.addEventListener('input', () => {
+            applyFiltersAndSearch(); // Gọi hàm kiểm tra chung
+        });
+
     </script>
 </body>
 </html>
