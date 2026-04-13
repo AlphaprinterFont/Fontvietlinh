@@ -99,14 +99,12 @@
 
         .controls-section { padding: 20px 40px; background-color: var(--bg-color); display: flex; flex-direction: column; gap: 20px; }
         
-        /* CSS MỚI: Bố cục cho hàng chứa Input và Tìm kiếm */
         .input-row { display: flex; gap: 15px; flex-wrap: wrap; width: 100%; }
         .global-input { padding: 15px; font-size: 18px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); outline: none;}
         .global-input:focus { border-color: var(--btn-active-bg); }
         .global-input::placeholder { color: #888; }
         [data-theme="blue"] .global-input::placeholder { color: #a8c7fa; }
         
-        /* Tỉ lệ chia không gian: Ô gõ chữ chiếm nhiều hơn ô tìm kiếm */
         .test-input { flex: 2; min-width: 250px; }
         .search-input { flex: 1; min-width: 200px; font-size: 16px; }
 
@@ -243,9 +241,9 @@
             { name: "Noticia Text Italic", file: "NoticiaText-Italic.woff2", downloadFile: "NoticiaText-Italic.ttf", category: "serif" },
             { name: "Noticia Text Bold", file: "NoticiaText-Bold.woff2", downloadFile: "NoticiaText-Bold.ttf", category: "serif" },
             { name: "Noticia Text Bold Italic", file: "NoticiaText-BoldItalic.woff2", downloadFile: "NoticiaText-BoldItalic.ttf", category: "serif" },
-            { name: "Alike", file: "VLAlike.woff2", downloadFile: "VLAlike.ttf", category: "serif" }
-            { name: "Kavoon", file: "VLKavoon.woff2", downloadFile: "VLKavoon.ttf", category: "display" }
-            { name: "Strait", file: "VLStrait.woff2", downloadFile: "VLStrait.ttf", category: "sans-serif" }
+            { name: "Alike", file: "VLAlike.woff2", downloadFile: "VLAlike.ttf", category: "serif" }, // Đã thêm dấu phẩy
+            { name: "Kavoon", file: "VLKavoon.woff2", downloadFile: "VLKavoon.ttf", category: "display" }, // Đã thêm dấu phẩy
+            { name: "Strait", file: "VLStrait.woff2", downloadFile: "VLStrait.ttf", category: "sans-serif" }, // Đã thêm dấu phẩy
             { name: "Grityle Black", file: "VLGrityleBlack.woff2", downloadFile: "VLGrityleBlack.ttf", category: "sans-serif" }
         ];
 
